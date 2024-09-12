@@ -30,7 +30,7 @@ jobs:
         with:
           context: ./image
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:signed
       - name: Attest
         uses: actions/attest@v1
         id: attest
