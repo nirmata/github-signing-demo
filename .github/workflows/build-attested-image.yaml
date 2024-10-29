@@ -28,9 +28,9 @@ jobs:
         id: push
         uses: docker/build-push-action@v5.0.0
         with:
-          context: ./image
+          context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:signed
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
       - name: Attest
         #uses: actions/attest@v1
         uses: actions/attest-build-provenance@v1
