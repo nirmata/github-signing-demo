@@ -16,10 +16,13 @@ spec:
     - imageReferences:
       - "*"
       type: SigstoreBundle
-      attestors:
-      - entries:
-        - keyless:
-            issuer: https://token.actions.githubusercontent.com
-            subject: https://github.com/nirmata/github-signing-demo/.github/workflows/build-attested-image.yaml@refs/heads/main
-            rekor:
-                url: https://rekor.sigstore.dev
+      attestations:
+      - type: https://slsa.dev/provenance/v1
+        attestors:
+        - entries:
+          - keyless:
+              issuer: https://token.actions.githubusercontent.com
+              subject: https://github.com/nirmata/github-signing-demo/.github/workflows/build-attested-image.yaml@refs/heads/main
+              rekor:
+                  url: https://rekor.sigstore.dev
+
