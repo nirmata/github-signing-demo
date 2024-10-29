@@ -1,5 +1,5 @@
 module artifact-attestation-example
 
-go 1.22.5
+go 1.22.3
 
 toolchain go1.22.7
