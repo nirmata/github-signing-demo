@@ -7,7 +7,33 @@ This repository demomstrates using Github's [artifact attestations](https://docs
 See [workflow](.github/workflows/build-attested-image.yaml)
 
 
-## Verification steps
+## Manual verification
+
+Run this program to manually check the attestation:
+
+```sh
+go run verify.go --image ghcr.io/nirmata/github-signing-demo:latest --predicate-type "https://slsa.dev/provenance/v1" --subject "https://github.com/nirmata/github-signing-demo/.github/workflows/build-attested-image.yaml@refs/heads/main"
+```
+
+You can also use the GitHub CLI:
+
+```sh
+gh attestation verify oci://ghcr.io/nirmata/github-signing-demo:latest --repo nirmata/github-signing-demo
+```
+
+This should show an output similar to:
+
+```sh
+Loaded digest sha256:79c29305a38c0c92657d72c0d14e0521227d02f0fc55eaa9fcc5c7f997efa944 for oci://ghcr.io/nirmata/github-signing-demo:latest
+Loaded 1 attestation from GitHub API
+✓ Verification succeeded!
+
+sha256:79c29305a38c0c92657d72c0d14e0521227d02f0fc55eaa9fcc5c7f997efa944 was attested by:
+REPO                         PREDICATE_TYPE                  WORKFLOW
+nirmata/github-signing-demo  https://slsa.dev/provenance/v1  .github/workflows/build-attested-image.yaml@refs/heads/main
+```
+
+## In Cluster Verification
 
 1. Create a kind cluster
 
@@ -60,3 +86,4 @@ sigstore-image-verification:
     sigstore bundle verification failed: no matching signatures found'
 
 ```
+

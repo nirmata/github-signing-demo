@@ -25,4 +25,17 @@ spec:
               subject: https://github.com/nirmata/github-signing-demo/.github/workflows/build-attested-image.yaml@refs/heads/main
               rekor:
                   url: https://rekor.sigstore.dev
+              additionalExtensions:
+                githubWorkflowTrigger: push
+                githubWorkflowName: build-attested-image
+                githubWorkflowRepository: nirmata/github-signing-demo
+        conditions:
+        - all:
+          - key: "{{ buildDefinition.buildType }}"
+            operator: Equals
+            value: "https://actions.github.io/buildtypes/workflow/v1"
+          - key: "{{ buildDefinition.externalParameters.workflow.repository }}"
+            operator: Equals
+            value: "https://github.com/nirmata/github-signing-demo"
+
 
