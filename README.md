@@ -16,7 +16,13 @@ See [workflow](.github/workflows/build-attested-image.yaml)
 kind create cluster
 ```
 
-2. Install Kyverno with GitHub the `TrustRoot` 
+2. Install Kyverno  
+
+```sh
+helm install kyverno kyverno/kyverno -n kyverno --create-namespace
+```
+
+**Note**: to verify a private GitHub repository install the GitHub `TrustRoot`:
 
 ```sh
 helm install kyverno kyverno/kyverno -n kyverno --create-namespace --values manifests/values.yaml
@@ -31,7 +37,11 @@ kubectl create -f manifests/policy.yaml
 4. Run the signed image
 
 ```sh
+kubectl run demo --dry-run=server --image  ghcr.io/nirmata/github-signing-demo:latest
+```
 
+```sh
+pod/demo created (server dry run)
 ```
 
 5. Run an unsigned image, and verify it is blocked
