@@ -12,7 +12,9 @@ See [workflow](.github/workflows/build-attested-image.yaml)
 Run this program to manually check the attestation:
 
 ```sh
+cd verify
 go run verify.go --image ghcr.io/nirmata/github-signing-demo:latest --predicate-type "https://slsa.dev/provenance/v1" --subject "https://github.com/nirmata/github-signing-demo/.github/workflows/build-attested-image.yaml@refs/heads/main"
+cd ..
 ```
 
 You can also use the GitHub CLI:
